@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Callbacks;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -32,9 +34,18 @@ public class PlayerMovement : MonoBehaviour
         m_Movement.Set(horizontal, 0f, vertical);
         m_Movement.Normalize ();
 
-        Vector3 desiredForward = Vector3.RotateTowards (transform.forward, m_Movement, turnSpeed * Time.deltaTime, 0f);
-        m_Rotation = Quaternion.LookRotation(desiredForward);
+        float angle = Mathf.Atan2(horizontal, vertical) * Mathf.Rad2Deg;
+        Vector3 dir = Quaternion.Euler(0f, angle, 0f) * Vector3.forward;
 
+        if(m_Movement != Vector3.zero)
+        {
+             m_Rigidbody.linearVelocity = dir * walkSpeed;
+             transform.rotation = Quaternion.Euler(0f, angle, 0f);
+        }
+        else
+        {
+            m_Rigidbody.linearVelocity = Vector3.zero;
+        }
         if (m_Movement != Vector3.zero)
         {
          anim.SetBool("Walking", true);     
@@ -44,7 +55,6 @@ public class PlayerMovement : MonoBehaviour
             anim.SetBool("Walking", false);
         }
         
-        m_Rigidbody.MoveRotation (m_Rotation);
-        m_Rigidbody.MovePosition (m_Rigidbody.position + m_Movement * walkSpeed * Time.deltaTime);
+       
     }
 }
