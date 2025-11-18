@@ -5,6 +5,8 @@ using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
+
+    public InputActionAsset inputActions;
     public InputAction MoveAction;
 
     public float walkSpeed = 1.0f;
@@ -20,7 +22,8 @@ public class PlayerMovement : MonoBehaviour
     {
         m_Rigidbody = GetComponent<Rigidbody>();
         anim = GetComponent<Animator>();
-        MoveAction.Enable();
+        inputActions.Enable();
+        MoveAction = inputActions.FindActionMap("Player").FindAction("Move");
     }
 
     void FixedUpdate ()
@@ -29,7 +32,7 @@ public class PlayerMovement : MonoBehaviour
         
         float horizontal = pos.x;
         float vertical = pos.y;
-        
+
         m_Movement.Set(horizontal, 0f, vertical);
         m_Movement.Normalize ();
 
