@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -26,23 +27,20 @@ public class PlayerMovement : MonoBehaviour
         MoveAction = inputActions.FindActionMap("Player").FindAction("Move");
     }
 
-    void FixedUpdate ()
+    void Update ()
     {
-        var pos = MoveAction.ReadValue<Vector2>();
-        
-        float horizontal = pos.x;
-        float vertical = pos.y;
+        Vector2 input = MoveAction.ReadValue<Vector2>();
+        Vector3 mov = new Vector3(input.x, 0, input.y);
 
-        m_Movement.Set(horizontal, 0f, vertical);
-        m_Movement.Normalize ();
-
-        Vector3 desiredForward = Vector3.RotateTowards (transform.forward, m_Movement, turnSpeed * Time.deltaTime, 0f);
-        m_Rotation = Quaternion.LookRotation (desiredForward);
+        if(mov.sqrMagnitude > 0)
+        {
+        float angle = Mathf.Atan2(mov.x, mov.z) * Mathf.Rad2Deg;
+        float targetAngle = Mathf.LerpAngle(transform.eulerAngles.y, angle, turnSpeed * Time.deltaTime);
+        transform.rotation = Quaternion.Euler(0f, targetAngle, 0f);
+        transform.Translate(mov * walkSpeed * Time.deltaTime, Space.World); 
+        }
         
-        m_Rigidbody.MoveRotation (m_Rotation);
-        m_Rigidbody.MovePosition(m_Rigidbody.position + m_Movement * walkSpeed * Time.deltaTime);
-        
-        if (m_Movement != Vector3.zero)
+        if (mov != Vector3.zero)
         {
          anim.SetBool("Walking", true);     
         }
