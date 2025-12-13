@@ -6,7 +6,6 @@ public class AIPatrol: MonoBehaviour
 
     public Transform [] positions;
     private NavMeshAgent agent;
-    private float timer;
 
     private int index;
 
@@ -15,6 +14,7 @@ public class AIPatrol: MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         index = 0;
         Vector3 newPos =new Vector3(positions[index].position.x, transform.position.y, positions[index].position.z);
+        agent.SetDestination(newPos);
     }
 
     void Update()
