@@ -6,7 +6,6 @@ public class AIPatrol: MonoBehaviour
 
     public Transform [] positions;
     private NavMeshAgent agent;
-
     private int index;
 
     void Start()
@@ -23,7 +22,7 @@ public class AIPatrol: MonoBehaviour
         {   index = (index + 1) % positions.Length;
             Vector3 newPos =new Vector3(positions[index].position.x, transform.position.y, positions[index].position.z);
             agent.SetDestination(newPos);
-        }
+        }   
         
     }
 }

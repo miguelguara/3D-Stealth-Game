@@ -41,7 +41,7 @@ public class Observer : MonoBehaviour
             {
                 if (raycastHit.collider.transform == player)
                 {
-                    Debug.Log("Player was caught!");
+                    Fimfase.instance.CaughtPlayer();
                 }
             }
         }
