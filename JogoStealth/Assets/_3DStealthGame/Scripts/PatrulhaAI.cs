@@ -3,7 +3,6 @@ using UnityEngine.AI;
 
 public class AIPatrol: MonoBehaviour
 {
-
     public Transform [] positions;
     private NavMeshAgent agent;
     private int index;

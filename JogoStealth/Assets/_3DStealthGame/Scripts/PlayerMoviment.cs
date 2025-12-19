@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -15,6 +16,7 @@ public class PlayerMovement : MonoBehaviour
 
     private Animator anim;
 
+    private Vector2 dir;
     Rigidbody m_Rigidbody;
     Vector3 m_Movement;
     Quaternion m_Rotation = Quaternion.identity;
