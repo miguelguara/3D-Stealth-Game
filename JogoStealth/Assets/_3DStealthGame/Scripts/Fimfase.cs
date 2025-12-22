@@ -40,6 +40,8 @@ public void CaughtPlayer()
 m_IsPlayerCaught = true;
 }
 
+
+
 void Update ()
 {
 if (m_IsPlayerAtExit)
