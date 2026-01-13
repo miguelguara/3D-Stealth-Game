@@ -9,7 +9,7 @@ public class PlayerMovement : MonoBehaviour
 {
 
     public InputActionAsset inputActions;
-    public InputAction MoveAction;
+    private InputAction MoveAction;
 
     public float walkSpeed = 1.0f;
     public float turnSpeed = 20f;
@@ -19,7 +19,6 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 dir;
     Rigidbody m_Rigidbody;
     Vector3 m_Movement;
-    Quaternion m_Rotation = Quaternion.identity;
 
     void Start ()
     {
@@ -49,6 +48,11 @@ public class PlayerMovement : MonoBehaviour
         else
         {
             anim.SetBool("Walking", false);
+        }
+
+        if(Input.GetMouseButtonDown(0))
+        {
+            Debug.Log("I hate niggers");
         }
     }
 }
