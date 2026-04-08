@@ -1,7 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -16,7 +12,6 @@ public class PlayerMovement : MonoBehaviour
 
     private Animator anim;
 
-    private Vector2 dir;
     Rigidbody m_Rigidbody;
     Vector3 m_Movement;
 
@@ -33,6 +28,7 @@ public class PlayerMovement : MonoBehaviour
         Vector2 input = MoveAction.ReadValue<Vector2>();
         Vector3 mov = new Vector3(input.x, 0, input.y);
 
+
         if(mov.sqrMagnitude > 0)
         {
         float angle = Mathf.Atan2(mov.x, mov.z) * Mathf.Rad2Deg;
@@ -48,11 +44,6 @@ public class PlayerMovement : MonoBehaviour
         else
         {
             anim.SetBool("Walking", false);
-        }
-
-        if(Input.GetMouseButtonDown(0))
-        {
-            Debug.Log("I hate niggers");
         }
     }
 }
